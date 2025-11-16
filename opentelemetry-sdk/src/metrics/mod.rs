@@ -1460,14 +1460,12 @@ mod tests {
         asynchronous_instruments_cumulative_data_points_only_from_last_measurement_helper(
             "gauge", true,
         );
-        // TODO fix: all asynchronous instruments should not emit data points if not measured
-        // but these implementations are still buggy
         asynchronous_instruments_cumulative_data_points_only_from_last_measurement_helper(
-            "counter", false,
+            "counter", true,
         );
         asynchronous_instruments_cumulative_data_points_only_from_last_measurement_helper(
             "updown_counter",
-            false,
+            true,
         );
     }
 
