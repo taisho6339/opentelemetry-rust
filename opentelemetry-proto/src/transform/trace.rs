@@ -351,7 +351,9 @@ mod tests {
             events: SpanEvents::default(),
             links: SpanLinks::default(),
             status: Status::Unset,
-            instrumentation_scope: Arc::new(InstrumentationScope::builder(instrumentation_name).build()),
+            instrumentation_scope: Arc::new(
+                InstrumentationScope::builder(instrumentation_name).build(),
+            ),
         }
     }
 
