@@ -10,6 +10,7 @@ use opentelemetry::{
     InstrumentationScope,
 };
 use std::fmt::{Display, Formatter};
+use std::sync::Arc;
 
 pub fn new_test_export_span_data() -> SpanData {
     SpanData {
@@ -31,7 +32,7 @@ pub fn new_test_export_span_data() -> SpanData {
         events: SpanEvents::default(),
         links: SpanLinks::default(),
         status: Status::Unset,
-        instrumentation_scope: InstrumentationScope::default(),
+        instrumentation_scope: Arc::new(InstrumentationScope::default()),
     }
 }
 

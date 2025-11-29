@@ -5,6 +5,7 @@ use opentelemetry::trace::{SpanContext, SpanId, SpanKind, Status};
 use opentelemetry::{InstrumentationScope, KeyValue};
 use std::borrow::Cow;
 use std::fmt::Debug;
+use std::sync::Arc;
 use std::time::{Duration, SystemTime};
 
 /// `SpanExporter` defines the interface that protocol-specific exporters must
@@ -104,5 +105,5 @@ pub struct SpanData {
     /// Span status
     pub status: Status,
     /// Instrumentation scope that produced this span
-    pub instrumentation_scope: InstrumentationScope,
+    pub instrumentation_scope: Arc<InstrumentationScope>,
 }

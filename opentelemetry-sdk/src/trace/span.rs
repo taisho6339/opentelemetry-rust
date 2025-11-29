@@ -12,6 +12,7 @@ use crate::trace::SpanLimits;
 use opentelemetry::trace::{Event, Link, SpanContext, SpanId, SpanKind, Status};
 use opentelemetry::KeyValue;
 use std::borrow::Cow;
+use std::sync::Arc;
 use std::time::SystemTime;
 
 /// Single operation within a trace.
@@ -266,7 +267,7 @@ fn build_export_data(
         events: data.events,
         links: data.links,
         status: data.status,
-        instrumentation_scope: tracer.instrumentation_scope().clone(),
+        instrumentation_scope: Arc::clone(tracer.instrumentation_scope()),
     }
 }
 
