@@ -5,8 +5,11 @@
 - Added `Resource::get_ref(&self, key: &Key) -> Option<&Value>` to allow retrieving a reference to a resource value without cloning.
 - **Breaking** Removed the following public hidden methods from the `SdkTracer` [#3227][3227]:
   - `id_generator`, `should_sample`
+- **Breaking** **Performance**: Changed `SpanData::instrumentation_scope` from `InstrumentationScope` to `Arc<InstrumentationScope>` ([#3267][3267]).
+  This reduces unnecessary clones when multiple `SpanProcessor`s are configured. Performance improvement scales with the number of processors.
 
 [3227]: https://github.com/open-telemetry/opentelemetry-rust/pull/3227
+[3267]: https://github.com/open-telemetry/opentelemetry-rust/pull/3267
 
 ## 0.31.0
 
