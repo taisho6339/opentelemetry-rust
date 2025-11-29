@@ -1255,6 +1255,7 @@ mod tests {
         use super::super::OtlpHttpClient;
         use opentelemetry_http::{Bytes, HttpClient};
         use std::collections::HashMap;
+        use std::sync::Arc;
 
         #[derive(Debug)]
         struct MockHttpClient;
@@ -1317,7 +1318,7 @@ mod tests {
                 events: SpanEvents::default(),
                 links: SpanLinks::default(),
                 status: Status::Unset,
-                instrumentation_scope: opentelemetry::InstrumentationScope::default(),
+                instrumentation_scope: Arc::new(opentelemetry::InstrumentationScope::default()),
             }
         }
 

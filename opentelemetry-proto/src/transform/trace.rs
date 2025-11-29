@@ -223,6 +223,7 @@ mod span_flags_tests {
     use opentelemetry::InstrumentationScope;
     use opentelemetry_sdk::trace::SpanData;
     use std::borrow::Cow;
+    use std::sync::Arc;
 
     #[test]
     fn test_build_span_flags_local_parent() {
@@ -272,7 +273,7 @@ mod span_flags_tests {
             events: opentelemetry_sdk::trace::SpanEvents::default(),
             links: opentelemetry_sdk::trace::SpanLinks::default(),
             status: opentelemetry::trace::Status::Unset,
-            instrumentation_scope: InstrumentationScope::builder("test").build(),
+            instrumentation_scope: Arc::new(InstrumentationScope::builder("test").build()),
         };
 
         let otlp_span: Span = span_data.into();
@@ -300,7 +301,7 @@ mod span_flags_tests {
             events: opentelemetry_sdk::trace::SpanEvents::default(),
             links: opentelemetry_sdk::trace::SpanLinks::default(),
             status: opentelemetry::trace::Status::Unset,
-            instrumentation_scope: InstrumentationScope::builder("test").build(),
+            instrumentation_scope: Arc::new(InstrumentationScope::builder("test").build()),
         };
 
         let otlp_span: Span = span_data.into();
@@ -325,6 +326,7 @@ mod tests {
     use opentelemetry_sdk::trace::SpanData;
     use opentelemetry_sdk::trace::{SpanEvents, SpanLinks};
     use std::borrow::Cow;
+    use std::sync::Arc;
     use std::time::Duration;
 
     fn create_test_span_data(instrumentation_name: &'static str) -> SpanData {
@@ -349,7 +351,7 @@ mod tests {
             events: SpanEvents::default(),
             links: SpanLinks::default(),
             status: Status::Unset,
-            instrumentation_scope: InstrumentationScope::builder(instrumentation_name).build(),
+            instrumentation_scope: Arc::new(InstrumentationScope::builder(instrumentation_name).build()),
         }
     }
 
@@ -503,7 +505,7 @@ mod tests {
             events: SpanEvents::default(),
             links: SpanLinks::default(),
             status: Status::Unset,
-            instrumentation_scope,
+            instrumentation_scope: Arc::new(instrumentation_scope),
         };
 
         let resource: ResourceAttributesWithSchema = (&resource).into();
